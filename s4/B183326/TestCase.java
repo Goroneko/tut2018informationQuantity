@@ -34,7 +34,7 @@ public class TestCase {
 	try {
 	    FrequencerInterface  myObject;
 	    int freq;
-	    System.out.println("\nchecking s4.B183326.Frequencer 1");
+	    System.out.println("checking s4.B183326.Frequencer");
 	    myObject = new s4.B183326.Frequencer();
 	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
 	    myObject.setTarget("H".getBytes());
@@ -49,68 +49,82 @@ public class TestCase {
 	    System.out.println("Exception occurred: STOP");
 	}
 
+  System.out.println("\n--------------------------------\n");
+
   //TARGET == 0
   try {
       FrequencerInterface myObject;
       int freq;
-      System.out.println("\nchecking s4.B183326.Frequencer 2");
       myObject = new s4.B183326.Frequencer();
       myObject.setSpace("Hi Ho Hi Ho".getBytes());
 	    myObject.setTarget("".getBytes());
 	    freq = myObject.frequency();
-	    System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+	    System.out.print("CASE 1 : \"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
 	    if(-1 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
   }catch(Exception e){
-      System.out.println("Exception occurred: STOP");
+      System.out.println("Exception occurred: STOP //TARGET=0");
   }
 
   //TARGET == NULL
   try {
       FrequencerInterface myObject;
       int freq;
-      System.out.println("\nchecking s4.B183326.Frequencer 3");
       myObject = new s4.B183326.Frequencer();
       myObject.setSpace("Hi Ho Hi Ho".getBytes());
 	    freq = myObject.frequency();
-	    System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+	    System.out.print("CASE 2 : \"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
 	    if(-1 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
   }catch(Exception e){
-      System.out.println("Exception occurred: STOP");
+      System.out.println("Exception occurred: STOP //TARGET=NULL");
   }
 
   //SPACE == 0
   try {
       FrequencerInterface myObject;
       int freq;
-      System.out.println("\nchecking s4.B183326.Frequencer 4");
       myObject = new s4.B183326.Frequencer();
       myObject.setSpace("".getBytes());
 	    myObject.setTarget("H".getBytes());
 	    freq = myObject.frequency();
-	    System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+	    System.out.print("CASE 3 : \"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
 	    if(0 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
   }catch(Exception e){
-      System.out.println("Exception occurred: STOP");
+      System.out.println("Exception occurred: STOP //SPACE=0");
   }
 
   //SPACE == NULL
   try {
       FrequencerInterface myObject;
       int freq;
-      System.out.println("\nchecking s4.B183326.Frequencer 5");
       myObject = new s4.B183326.Frequencer();
 	    myObject.setTarget("H".getBytes());
 	    freq = myObject.frequency();
-	    System.out.print("\"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
+	    System.out.print("CASE 4 : \"H\" in \"Hi Ho Hi Ho\" appears "+freq+" times. ");
 	    if(0 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
   }catch(Exception e){
-      System.out.println("Exception occurred: STOP");
+      System.out.println("Exception occurred: STOP //SPACE=NULL");
   }
+
+  //subByteFrequency
+  try {
+      FrequencerInterface myObject;
+      int freq;
+      myObject = new s4.B183326.Frequencer();
+      myObject.setSpace("Hi Ho Hi Ho".getBytes());
+	    myObject.setTarget("H".getBytes());
+      freq = myObject.subByteFrequency(1, 4);
+      System.out.print("CASE 5 : \"H\" in \"i Ho\" appears "+freq+" times. ");
+      if(1 == freq) { System.out.println("OK"); } else {System.out.println("WRONG"); }
+  }catch(Exception e){
+      System.out.println("Exception occurred: STOP //SPACE=NULL");
+  }
+
+  System.out.println("\n--------------------------------\n");
 
 	try {
 	    InformationEstimatorInterface myObject;
 	    double value;
-	    System.out.println("\nchecking s4.B183326.InformationEstimator");
+	    System.out.println("checking s4.B183326.InformationEstimator");
 	    myObject = new s4.B183326.InformationEstimator();
 	    myObject.setSpace("3210321001230123".getBytes());
 	    myObject.setTarget("0".getBytes());
@@ -130,5 +144,65 @@ public class TestCase {
 	    System.out.println("Exception occurred: STOP");
 	}
 
+  System.out.println("\n--------------------------------\n");
+/*
+  //TARGET == 0
+  try {
+      InformationEstimatorInterface myObject;
+      double value;
+      myObject = new s4.B183326.InformationEstimator();
+      myObject.setSpace("3210321001230123".getBytes());
+      myObject.setTarget("".getBytes());
+      value = myObject.estimation();
+      System.out.println("CASE 1 : SPACE = 3210321001230123");
+      System.out.println(">0 "+value);
+  }
+  catch(Exception e) {
+      System.out.println("Exception occurred: STOP //TARGET=0");
+  }
+
+  //TARGET == NULL
+  try {
+      InformationEstimatorInterface myObject;
+      double value;
+      myObject = new s4.B183326.InformationEstimator();
+      myObject.setSpace("3210321001230123".getBytes());
+      value = myObject.estimation();
+      System.out.println("CASE 2 : SPACE = 3210321001230123");
+      System.out.println(">NULL "+value);
+  }
+  catch(Exception e) {
+      System.out.println("Exception occurred: STOP //TARGET=NULL");
+  }
+
+  //ANSWER == INFINITE
+  try {
+      InformationEstimatorInterface myObject;
+      double value;
+      myObject = new s4.B183326.InformationEstimator();
+      myObject.setSpace("111111".getBytes());
+      myObject.setTarget("0".getBytes());
+      value = myObject.estimation();
+      System.out.println("CASE 3 : SPACE = 111111");
+      System.out.println(">0 "+value);
+  }
+  catch(Exception e) {
+      System.out.println("Exception occurred: STOP //SPACE=INFINITE");
+  }
+
+  //SPACE == NULL
+  try {
+      InformationEstimatorInterface myObject;
+      double value;
+      myObject = new s4.B183326.InformationEstimator();
+      myObject.setTarget("0".getBytes());
+      value = myObject.estimation();
+      System.out.println("CASE 4: SPACE = NULL");
+      System.out.println(">0 "+value);
+  }
+  catch(Exception e) {
+      System.out.println("Exception occurred: STOP //SPACE=NULL");
+  }
+*/
     }
 }
