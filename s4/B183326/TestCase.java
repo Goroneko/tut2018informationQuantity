@@ -145,7 +145,7 @@ public class TestCase {
 	}
 
   System.out.println("\n--------------------------------\n");
-/*
+
   //TARGET == 0
   try {
       InformationEstimatorInterface myObject;
@@ -155,7 +155,8 @@ public class TestCase {
       myObject.setTarget("".getBytes());
       value = myObject.estimation();
       System.out.println("CASE 1 : SPACE = 3210321001230123");
-      System.out.println(">0 "+value);
+      System.out.print(">0 "+value);
+      if(0 == value) { System.out.println(" OK"); } else {System.out.println(" WRONG"); }
   }
   catch(Exception e) {
       System.out.println("Exception occurred: STOP //TARGET=0");
@@ -169,7 +170,8 @@ public class TestCase {
       myObject.setSpace("3210321001230123".getBytes());
       value = myObject.estimation();
       System.out.println("CASE 2 : SPACE = 3210321001230123");
-      System.out.println(">NULL "+value);
+      System.out.print(">NULL "+value);
+      if(0 == value) { System.out.println(" OK"); } else {System.out.println(" WRONG"); }
   }
   catch(Exception e) {
       System.out.println("Exception occurred: STOP //TARGET=NULL");
@@ -184,7 +186,8 @@ public class TestCase {
       myObject.setTarget("0".getBytes());
       value = myObject.estimation();
       System.out.println("CASE 3 : SPACE = 111111");
-      System.out.println(">0 "+value);
+      System.out.print(">0 "+value);
+      if(Double.MAX_VALUE == value) { System.out.println(" OK"); } else {System.out.println(" WRONG"); }
   }
   catch(Exception e) {
       System.out.println("Exception occurred: STOP //SPACE=INFINITE");
@@ -199,10 +202,11 @@ public class TestCase {
       value = myObject.estimation();
       System.out.println("CASE 4: SPACE = NULL");
       System.out.println(">0 "+value);
+      if(Double.MAX_VALUE == value) { System.out.println(" OK"); } else {System.out.println(" WRONG"); }
   }
   catch(Exception e) {
       System.out.println("Exception occurred: STOP //SPACE=NULL");
   }
-*/
+
     }
 }
