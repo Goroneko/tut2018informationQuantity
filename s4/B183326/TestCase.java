@@ -145,7 +145,7 @@ public class TestCase {
 	}
 
   System.out.println("\n--------------------------------\n");
-/*
+
   //TARGET == 0
   try {
       InformationEstimatorInterface myObject;
@@ -203,6 +203,6 @@ public class TestCase {
   catch(Exception e) {
       System.out.println("Exception occurred: STOP //SPACE=NULL");
   }
-*/
+
     }
 }
