@@ -20,6 +20,7 @@ public class InformationEstimator implements InformationEstimatorInterface{
   byte [] myTarget; // data to compute its information quantity
   byte [] mySpace;  // Sample space to compute the probability
   FrequencerInterface myFrequencer;  // Object for counting frequency
+  double [][] IQ_save;
 
   byte [] subBytes(byte [] x, int start, int end) {
     // corresponding to substring of String for  byte[] ,
@@ -34,16 +35,33 @@ public class InformationEstimator implements InformationEstimatorInterface{
 	   return  - Math.log10((double) freq / (double) mySpace.length)/ Math.log10((double) 2.0);
   }
 
-  public void setTarget(byte [] target) { myTarget = target;}
+  public void setTarget(byte [] target) {
+    myTarget = target;
+  }
+
   public void setSpace(byte []space) {
     myFrequencer = new Frequencer();
     mySpace = space;
     myFrequencer.setSpace(space);
   }
 
+  public void calc_IQ(){
+    IQ_save = new double [myTarget.length][myTarget.length+1];
+    for(int i=0;i<myTarget.length;i++){
+      for(int j=i+1;j<myTarget.length+1;j++){
+        myFrequencer.setTarget(subBytes(myTarget, i, j));
+        IQ_save[i][j] = iq(myFrequencer.frequency());
+        // System.out.println("("+i+","+j+")IQ:"+IQ_save[i][j]);
+      }
+    }
+  }
+
   public double estimation(){
     boolean [] partition = new boolean[myTarget.length+1];
     int np;
+
+    calc_IQ();
+
     np = 1<<(myTarget.length-1);
     // System.out.println("np="+np+" length="+myTarget.length);
     double value = Double.MAX_VALUE; // value = mininimum of each "value1".
@@ -71,9 +89,12 @@ public class InformationEstimator implements InformationEstimatorInterface{
           // System.out.write(myTarget[end]);
           end++;
         }
-        // System.out.print("("+start+","+end+")");
-        myFrequencer.setTarget(subBytes(myTarget, start, end));
-	      value1 = value1 + iq(myFrequencer.frequency());
+        // System.out.print("("+start+","+ end +")");
+        // myFrequencer.setTarget(subBytes(myTarget, start, end));
+	      // value1 = value1 + iq(myFrequencer.frequency());
+        // System.out.println("IQ:" + IQ_save[start][end]);
+        value1 = value1 + IQ_save[start][end];
+        // System.out.println(value1);
 	      start = end;
       }
       // System.out.println(" "+ value1);
